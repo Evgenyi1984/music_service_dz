@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS Список_альбомов (
 
 CREATE TABLE IF NOT EXISTS Список_трекеров (
 	id SERIAL PRIMARY key REFERENCES Список_альбомов(id),
-	альбом_id INTEGER not null,
+	альбом_id Serial Primary Key,
 	Название VARCHAR(180) NOT NULL,
 	длительность INTEGER not NULL
 );
