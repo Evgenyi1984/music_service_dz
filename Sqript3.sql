@@ -9,12 +9,6 @@ CREATE TABLE IF NOT EXISTS Список_исполнителей (
 	);
 
 
-
-CREATE TABLE IF NOT EXISTS Список_музыкальных_жанров (
-	id SERIAL PRIMARY KEY,
-	Название VARCHAR(180) NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS Список_альбомов (
 	id SERIAL PRIMARY KEY,
 	Название VARCHAR(180) NOT NULL,
@@ -24,8 +18,8 @@ CREATE TABLE IF NOT EXISTS Список_альбомов (
 
 
 CREATE TABLE IF NOT EXISTS Список_трекеров (
-	id SERIAL PRIMARY key REFERENCES Список_альбомов(id),
-	альбом_id Serial Primary Key,
+	id SERIAL PRIMARY key ,
+	альбом_id int REFERENCES Список_альбомов(id),
 	Название VARCHAR(180) NOT NULL,
 	длительность INTEGER not NULL
 );
@@ -33,7 +27,7 @@ CREATE TABLE IF NOT EXISTS Список_трекеров (
 CREATE TABLE IF NOT exists Сборник (
 	id SERIAL PRIMARY KEY,
 	Название_сборника VARCHAR(180) NOT null,
-	Год_выпуска DATE CHECK (год_выпуска > '1900-01-01')
+	Год_выпуска DATE CHECK (Год_выпуска > '1900-01-01')
 	);
 
 CREATE TABLE IF NOT EXISTS Связь_исполнителей_и_жанров (
@@ -49,20 +43,7 @@ CREATE TABLE IF NOT EXISTS Связь_исполнителей_и_альбомо
 );
 
 CREATE TABLE IF NOT EXISTS Связь_сборника_и_трекера (
-	альбом_id INTEGER REFERENCES альбом_id,
+	Сборник_id INTEGER REFERENCES Сборник(id),
 	Список_трекеров_id INTEGER REFERENCES Список_трекеров(id),
-	CONSTRAINT iz PRIMARY KEY (альбом_id, Список_трекеров_id)
+	CONSTRAINT it PRIMARY KEY (Сборник_id, Список_трекеров_id)
 );
-
-
-
-
-
-
-
-
-
-
-
-
-
